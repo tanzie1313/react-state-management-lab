@@ -105,6 +105,11 @@ const App = () => {
         console.log('Not enough money');
       }
     };
+    const handleRemoveFighter = (fighter) => {
+      setTeam(team.filter(f => f.id !== fighter.id));
+      setZombieFighters([...zombieFighters, fighter]);
+      setMoney(money + fighter.price);
+    };
 // Calculate total strength of the team
 const totalStrength = team.reduce((total, fighter) => total + fighter.strength, 0);
 // Calculate total agility of the team
@@ -141,6 +146,7 @@ return (
             <p>Price: ${fighter.price}</p>
             <p>Strength: {fighter.strength}</p>
             <p>Agility: {fighter.agility}</p>
+            <button onClick={() => handleRemoveFighter(fighter)}>Remove from Team</button>
           </li>
         ))}
       </ul>
