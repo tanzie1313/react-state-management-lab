@@ -96,14 +96,58 @@ const App = () => {
       },
     ]);
 
-  return (
-    <div>
-      {/* Your component JSX goes here */}
-    </div>
-  );
+    const handleAddFighter = (fighter) => {
+      if (money >= fighter.price) {
+        setTeam([...team, fighter]);
+        setZombieFighters(zombieFighters.filter(z => z.id !== fighter.id));
+        setMoney(money - fighter.price);
+      } else {
+        console.log('Not enough money');
+      }
+    };
+// Calculate total strength of the team
+const totalStrength = team.reduce((total, fighter) => total + fighter.strength, 0);
+// Calculate total agility of the team
+const totalAgility = team.reduce((total, fighter) => total + fighter.agility, 0); //reduce method to calculate the total agility of the team
+
+
+return (
+  <div>
+    <h1>Zombie Fighters</h1>
+    <p>Money: ${money}</p>
+    <ul>
+      {zombieFighters.map(fighter => (
+        <li key={fighter.id}>
+          <img src={fighter.img} alt={fighter.name} />
+          <p>Name: {fighter.name}</p>
+          <p>Price: ${fighter.price}</p>
+          <p>Strength: {fighter.strength}</p>
+          <p>Agility: {fighter.agility}</p>
+          <button onClick={() => handleAddFighter(fighter)}>Add to Team</button>
+        </li>
+      ))}
+    </ul>
+    <h2>Your Team</h2>
+    <p>Total Strength: {totalStrength}</p>
+    <p>Total Agility: {totalAgility}</p>
+    {team.length === 0 ? (
+      <p>Pick some team members!</p>
+    ) : (
+      <ul>
+        {team.map(fighter => (
+          <li key={fighter.id}>
+            <img src={fighter.img} alt={fighter.name} />
+            <p>Name: {fighter.name}</p>
+            <p>Price: ${fighter.price}</p>
+            <p>Strength: {fighter.strength}</p>
+            <p>Agility: {fighter.agility}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
 };
 
 export default App
-
-
 
