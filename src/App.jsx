@@ -13,8 +13,7 @@ const App = () => {
   const [money, setMoney] = useState(100);
 
   // State for available zombie fighters
-  const [zombieFighters, setZombieFighters] = useState(
-    [
+  const [zombieFighters, setZombieFighters] = useState([
       {
         id: 1,
         name: 'Survivor',
